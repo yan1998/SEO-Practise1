@@ -1,18 +1,34 @@
-﻿using BusinessLogic.Abstractions;
-using System;
+﻿using System.Threading.Tasks;
+using BusinessLogic.Abstractions;
+using Models.Requests;
+using Models.Responses;
+using Models.Settings;
 
 namespace BusinessLogic.Implementations
 {
     public class GoogleSearch : IGoogleSearch
     {
-        public GoogleSearch()
+        private readonly GoogleSearchSettings _googleSearchSettings;
+        private readonly IRestClient _restClient;
+
+        public GoogleSearch(GoogleSearchSettings googleSearchSettings,
+            IRestClient restClient)
         {
-            Console.WriteLine("Ctor!");
+            _googleSearchSettings = googleSearchSettings;
+            _restClient = restClient;
         }
 
-        public void Test()
+        public Task<GoogleSearchResponse> Search(string request)
         {
-            Console.WriteLine("Test!");
+            var googleRequest = new GoogleSearchRequest
+            {
+                Cx = _googleSearchSettings.Cx,
+                Key = _googleSearchSettings.ApiKey,
+                Num = 10,
+                Q = request
+            };
+
+            return _restClient.GetAsync<GoogleSearchRequest, GoogleSearchResponse>(_googleSearchSettings.Endpoint, googleRequest);
         }
     }
 }

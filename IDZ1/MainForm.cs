@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Abstractions;
+using Models.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,9 +22,16 @@ namespace IDZ1
             InitializeComponent();
         }
 
-        private void btn_searchCompetitors_Click(object sender, EventArgs e)
+        private async void btn_searchCompetitors_Click(object sender, EventArgs e)
         {
-            _googleSearch.Test();
+            if (textBox_searchCompetitors.Text == string.Empty)
+            {
+                MessageBox.Show("Введите ключевое слово!");
+            }
+            else
+            {
+                var response = await _googleSearch.Search(textBox_searchCompetitors.Text);
+            }
         }
     }
 }

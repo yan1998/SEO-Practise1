@@ -1,7 +1,10 @@
-﻿namespace BusinessLogic.Abstractions
+﻿using System.Threading.Tasks;
+using Models.Responses;
+
+namespace BusinessLogic.Abstractions
 {
     public interface IGoogleSearch
     {
-        void Test();
+        Task<GoogleSearchResponse> Search(string request);
     }
 }

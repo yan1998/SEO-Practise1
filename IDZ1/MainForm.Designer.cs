@@ -32,7 +32,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btn_searchCompetitors = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_searchCompetitors = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -52,7 +52,7 @@
             // 
             this.tabPage1.Controls.Add(this.btn_searchCompetitors);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.textBox_searchCompetitors);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -80,12 +80,12 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Введите ключевой запрос для поиска конкурентов";
             // 
-            // textBox1
+            // textBox_searchCompetitors
             // 
-            this.textBox1.Location = new System.Drawing.Point(111, 42);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(313, 23);
-            this.textBox1.TabIndex = 0;
+            this.textBox_searchCompetitors.Location = new System.Drawing.Point(111, 42);
+            this.textBox_searchCompetitors.Name = "textBox_searchCompetitors";
+            this.textBox_searchCompetitors.Size = new System.Drawing.Size(313, 23);
+            this.textBox_searchCompetitors.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -118,7 +118,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button btn_searchCompetitors;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_searchCompetitors;
         private System.Windows.Forms.TabPage tabPage2;
     }
 }
