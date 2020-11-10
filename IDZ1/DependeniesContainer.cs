@@ -1,10 +1,8 @@
 ﻿using BusinessLogic.Abstractions;
 using BusinessLogic.Implementations;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using Models.Settings;
 using Ninject.Modules;
-using System;
 using System.Net.Http;
 
 namespace IDZ1
@@ -15,14 +13,16 @@ namespace IDZ1
         {
             ConfigureServices();
             ConfigureForms();
-            ConfigureOptions();
+            ConfigureApplicationSettings();
         }
 
         private void ConfigureServices()
         {
-            Bind<HttpClient>().To<HttpClient>();
-            Bind<IRestClient>().To<RestClient>();
-            Bind<IGoogleSearch>().To<GoogleSearch>().InTransientScope();
+            Bind<HttpClient>().To<HttpClient>().InTransientScope();
+            Bind<IRestClient>().To<RestClient>().InTransientScope();
+            Bind<IGoogleSearchService>().To<GoogleSearchService>().InTransientScope();
+            Bind<IGoogleTrendsService>().To<GoogleTrendsService>().InTransientScope();
+            Bind<IBukvarixService>().To<BukvarixService>().InTransientScope();
         }
 
         private void ConfigureForms()
@@ -30,13 +30,15 @@ namespace IDZ1
             Bind<MainForm>().To<MainForm>().InSingletonScope();
         }
 
-        private void ConfigureOptions()
+        private void ConfigureApplicationSettings()
         {
             var configuration = new ConfigurationBuilder()
                     .AddJsonFile("appsettings.json")
                     .Build();
 
             Bind<GoogleSearchSettings>().ToMethod(x => configuration.GetSection("GoogleSearchSettings").Get<GoogleSearchSettings>());
+            Bind<GoogleTrendsSettings>().ToMethod(x => configuration.GetSection("GoogleTrendsSettings").Get<GoogleTrendsSettings>());
+            Bind<BukvarixSettings>().ToMethod(x => configuration.GetSection("BukvarixSettings").Get<BukvarixSettings>());
         }
     }
 }

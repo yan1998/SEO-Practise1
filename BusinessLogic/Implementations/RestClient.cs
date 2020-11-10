@@ -25,6 +25,8 @@ namespace BusinessLogic.Implementations
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var responseString = await response.Content.ReadAsStringAsync();
+                if (responseString.Substring(0, 5) == ")]}',")
+                    responseString = responseString.Substring(5, responseString.Length - 5);
                 var responseObject = JsonConvert.DeserializeObject<TResponse>(responseString);
                 return responseObject;
             }

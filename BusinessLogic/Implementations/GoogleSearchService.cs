@@ -6,12 +6,12 @@ using Models.Settings;
 
 namespace BusinessLogic.Implementations
 {
-    public class GoogleSearch : IGoogleSearch
+    public class GoogleSearchService : IGoogleSearchService
     {
         private readonly GoogleSearchSettings _googleSearchSettings;
         private readonly IRestClient _restClient;
 
-        public GoogleSearch(GoogleSearchSettings googleSearchSettings,
+        public GoogleSearchService(GoogleSearchSettings googleSearchSettings,
             IRestClient restClient)
         {
             _googleSearchSettings = googleSearchSettings;

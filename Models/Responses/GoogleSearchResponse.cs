@@ -5,7 +5,7 @@ namespace Models.Responses
     // Documentaion reference: https://developers.google.com/custom-search/v1/using_rest
     public class GoogleSearchResponse
     {
-        public ICollection<SearchItem> Items { get; set; }
+        public List<SearchItem> Items { get; set; }
     }
 
     public class SearchItem

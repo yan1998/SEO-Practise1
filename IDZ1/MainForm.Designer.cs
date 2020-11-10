@@ -30,12 +30,15 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel_searchResults = new System.Windows.Forms.Panel();
             this.btn_searchCompetitors = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_searchCompetitors = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -50,6 +53,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.panel_searchResults);
             this.tabPage1.Controls.Add(this.btn_searchCompetitors);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.textBox_searchCompetitors);
@@ -60,6 +65,14 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Определение конкурентов";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // panel_searchResults
+            // 
+            this.panel_searchResults.AutoScroll = true;
+            this.panel_searchResults.Location = new System.Drawing.Point(111, 96);
+            this.panel_searchResults.Name = "panel_searchResults";
+            this.panel_searchResults.Size = new System.Drawing.Size(447, 212);
+            this.panel_searchResults.TabIndex = 3;
             // 
             // btn_searchCompetitors
             // 
@@ -89,6 +102,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -97,17 +111,30 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(271, 67);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 369);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Main Form";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -120,6 +147,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_searchCompetitors;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Panel panel_searchResults;
+        private System.Windows.Forms.Button button1;
     }
 }
 

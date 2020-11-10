@@ -3,7 +3,7 @@ using Models.Responses;
 
 namespace BusinessLogic.Abstractions
 {
-    public interface IGoogleSearch
+    public interface IGoogleSearchService
     {
         Task<GoogleSearchResponse> Search(string request);
     }
