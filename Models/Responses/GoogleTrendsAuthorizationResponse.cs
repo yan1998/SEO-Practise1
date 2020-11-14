@@ -16,5 +16,9 @@ namespace Models.Responses
     public class GoogleTrendsAuthorizationWidgetsRequest
     {
         public string Time { get; set; }
+
+        public string Resolution { get; set; }
+
+        public string Locale { get; set; }
     }
 }

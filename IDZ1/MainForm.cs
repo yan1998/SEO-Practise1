@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Abstractions;
+using Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -102,13 +103,12 @@ namespace IDZ1
                 var mediumFrequencyKeywordsList = new List<string>();
                 var lowFrequencyKeywordsList = new List<string>();
 
-                foreach (var keyword in richTextBox_KeywordsToGroupByFrequency.Lines.Where(x => x.Trim() != string.Empty))
+                foreach (var keyword in richTextBox_KeywordsToGroupByFrequency.Lines.Where(x => x.Trim() != string.Empty).Distinct())
                 {
-                    /* It doesn't work due to token
-                        var response = await _googleTrendsService.GetTrends(keyword.Trim());
-                        var averageFrequency = response.Default.TimelineData.Sum(x => x.Value.Single()) / response.Default.TimelineData.Count;
-                    */
-                    var averageFrequency = await _bukvarixService.GetAverageQueryFrequency(keyword.Trim());
+                    var response = await _googleTrendsService.GetTrendsForPeriod(keyword, GoogleTrendsPeriod.PastMonth);
+                    var averageFrequency = response.Default.TimelineData.Sum(x => x.Value.Single());
+                    
+                    //var averageFrequency = await _bukvarixService.GetAverageQueryFrequency(keyword.Trim());
                     if (averageFrequency >= highFrequencyThreshold)
                         highFrequencyKeywordsList.Add($"{keyword} - {averageFrequency}");
                     else if (averageFrequency < lowFrequencyThreshold)
@@ -130,7 +130,7 @@ namespace IDZ1
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            var test = await _googleTrendsService.GetTrends("Трамп");
+            var test = await _googleTrendsService.GetTrendsForPeriod("Путин", GoogleTrendsPeriod.PastMonth);
         }
     }
 }

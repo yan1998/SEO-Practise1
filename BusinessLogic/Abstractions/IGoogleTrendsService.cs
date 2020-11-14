@@ -1,10 +1,11 @@
-﻿using Models.Responses;
+﻿using Models.Enums;
+using Models.Responses;
 using System.Threading.Tasks;
 
 namespace BusinessLogic.Abstractions
 {
     public interface IGoogleTrendsService
     {
-        Task<GoogleTrendsDataResponse> GetTrends(string request);
+        Task<GoogleTrendsDataResponse> GetTrendsForPeriod(string request, GoogleTrendsPeriod period);
     }
 }
