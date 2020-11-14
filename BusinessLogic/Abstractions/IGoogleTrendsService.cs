@@ -5,6 +5,6 @@ namespace BusinessLogic.Abstractions
 {
     public interface IGoogleTrendsService
     {
-        Task<GoogleTrendsResponse> GetTrends(string request);
+        Task<GoogleTrendsDataResponse> GetTrends(string request);
     }
 }

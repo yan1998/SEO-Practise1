@@ -2,6 +2,7 @@
 using Models.Requests;
 using Models.Responses;
 using Models.Settings;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BusinessLogic.Implementations
@@ -28,6 +29,13 @@ namespace BusinessLogic.Implementations
             };
 
             return _restClient.GetAsync<BukvarixRequest, BukvarixResponse>(_bukvarixSettings.Endpoint, bukvarixRequest);
+        }
+
+        public async Task<long> GetAverageQueryFrequency(string request)
+        {
+            var response = await GetWordCombinations(request);
+            var item = response.Data.FirstOrDefault(x => x[0].ToLower() == request.ToLower());
+            return long.Parse(item?[3] ?? "0");
         }
     }
 }

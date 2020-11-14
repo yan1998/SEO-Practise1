@@ -1,6 +1,6 @@
 ﻿namespace Models.Requests
 {
-    public class GoogleTrendsRequest
+    public class GoogleTrendsDataRequest
     {
         public string Tz { get; set; }
 

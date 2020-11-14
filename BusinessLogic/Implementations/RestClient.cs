@@ -13,20 +13,19 @@ namespace BusinessLogic.Implementations
         public RestClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            _httpClient.DefaultRequestHeaders.Add("Cookie", "NID=204=f3hQ81XYHoYmR2YiwLTul7gphZKIYYKm16lHLRnQVTTUojnL_F1XZWK2Y0-7BUNztKrgJQu5x31G-U90ucgsJ5FgJrXBvwUeIXb2lrRhGzuViOK0VQadBuKTbgUNcOYKNT-cMzp8AC2vFlL2uL96Bk3L6VXmqTpc_p5eNdvbspE");
         }
 
-
         public async Task<TResponse> GetAsync<TRequest, TResponse>(string endpoint, TRequest request)
-            where TRequest: class
-            where TResponse: class
+            where TRequest : class
+            where TResponse : class
         {
             var queryParameters = GenerateQueryParameters(request);
             var response = await _httpClient.GetAsync(endpoint + queryParameters);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var responseString = await response.Content.ReadAsStringAsync();
-                if (responseString.Substring(0, 5) == ")]}',")
-                    responseString = responseString.Substring(5, responseString.Length - 5);
+                responseString = CorrectResponseStringIfNeeded(responseString);
                 var responseObject = JsonConvert.DeserializeObject<TResponse>(responseString);
                 return responseObject;
             }
@@ -49,6 +48,16 @@ namespace BusinessLogic.Implementations
                 queryParameters.Append($"{property.Name.ToLower()}={property.GetValue(request)}&");
             }
             return queryParameters.ToString();
+        }
+
+        private string CorrectResponseStringIfNeeded(string responseString)
+        {
+            if (responseString.Substring(0, 5) == ")]}',")
+                return responseString.Substring(5, responseString.Length - 5);
+            else if (responseString.Substring(0, 5) == ")]}'\n")
+                return responseString.Substring(5, responseString.Length - 5);
+            else 
+                return responseString;
         }
     }
 }

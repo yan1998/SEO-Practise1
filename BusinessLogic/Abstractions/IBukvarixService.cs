@@ -6,5 +6,7 @@ namespace BusinessLogic.Abstractions
     public interface IBukvarixService
     {
         Task<BukvarixResponse> GetWordCombinations(string request);
+
+        Task<long> GetAverageQueryFrequency(string request);
     }
 }
