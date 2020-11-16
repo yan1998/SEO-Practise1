@@ -23,6 +23,7 @@ namespace IDZ1
             Bind<IGoogleSearchService>().To<GoogleSearchService>().InTransientScope();
             Bind<IGoogleTrendsService>().To<GoogleTrendsService>().InTransientScope();
             Bind<IBukvarixService>().To<BukvarixService>().InTransientScope();
+            Bind<IAdvegoService>().To<AdvegoService>().InTransientScope();
         }
 
         private void ConfigureForms()
@@ -39,6 +40,7 @@ namespace IDZ1
             Bind<GoogleSearchSettings>().ToMethod(x => configuration.GetSection("GoogleSearchSettings").Get<GoogleSearchSettings>());
             Bind<GoogleTrendsSettings>().ToMethod(x => configuration.GetSection("GoogleTrendsSettings").Get<GoogleTrendsSettings>());
             Bind<BukvarixSettings>().ToMethod(x => configuration.GetSection("BukvarixSettings").Get<BukvarixSettings>());
+            Bind<AdvegoSettings>().ToMethod(x => configuration.GetSection("AdvegoSettings").Get<AdvegoSettings>());
         }
     }
 }

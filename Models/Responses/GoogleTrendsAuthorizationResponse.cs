@@ -20,5 +20,12 @@ namespace Models.Responses
         public string Resolution { get; set; }
 
         public string Locale { get; set; }
+
+        public GoogleTrendsAUthorizationRequestOptions RequestOptions { get; set; }
+    }
+
+    public class GoogleTrendsAUthorizationRequestOptions
+    {
+        public string Backend { get; set; }
     }
 }

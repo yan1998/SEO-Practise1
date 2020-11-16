@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Models.Requests;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.Abstractions
 {
@@ -7,5 +8,7 @@ namespace BusinessLogic.Abstractions
         Task<TResponse> GetAsync<TRequest, TResponse>(string endpoint, TRequest request)
             where TRequest : class
             where TResponse : class;
+
+        Task<string> PostAsync(string endpoint, AdvegoRequest body);
     }
 }

@@ -28,7 +28,7 @@ namespace BusinessLogic.Implementations
             {
                 Tz = _googleTrendsSettings.Tz,
                 Token = authorizationResponse.Token,
-                Req = $"%7B%22time%22:%22{authorizationResponse.Request.Time}%22,%22resolution%22:%22{authorizationResponse.Request.Resolution}%22,%22locale%22:%22{authorizationResponse.Request.Locale}%22,%22comparisonItem%22:%5B%7B%22geo%22:%7B%7D,%22complexKeywordsRestriction%22:%7B%22keyword%22:%5B%7B%22type%22:%22BROAD%22,%22value%22:%22{request}%22%7D%5D%7D%7D%5D,%22requestOptions%22:%7B%22property%22:%22%22,%22backend%22:%22IZG%22,%22category%22:0%7D%7D"
+                Req = $"%7B%22time%22:%22{authorizationResponse.Request.Time.Replace("\\", "%5C%5C").Replace(' ', '+')}%22,%22resolution%22:%22{authorizationResponse.Request.Resolution}%22,%22locale%22:%22{authorizationResponse.Request.Locale}%22,%22comparisonItem%22:%5B%7B%22geo%22:%7B%7D,%22complexKeywordsRestriction%22:%7B%22keyword%22:%5B%7B%22type%22:%22BROAD%22,%22value%22:%22{request}%22%7D%5D%7D%7D%5D,%22requestOptions%22:%7B%22property%22:%22%22,%22backend%22:%22{authorizationResponse.Request.RequestOptions.Backend}%22,%22category%22:0%7D%7D"
             };
 
             return await _restClient.GetAsync<GoogleTrendsDataRequest, GoogleTrendsDataResponse>(_googleTrendsSettings.DataEndpoint, googleRequest);
@@ -45,9 +45,6 @@ namespace BusinessLogic.Implementations
                 case GoogleTrendsPeriod.PastYear:
                     periodRequest = "today+12-m";
                     break;
-                case GoogleTrendsPeriod.Past6Months:
-                    periodRequest = "today+6-m";
-                    break;
                 case GoogleTrendsPeriod.Past3Months:
                     periodRequest = "today+3-m";
                     break;
@@ -58,10 +55,7 @@ namespace BusinessLogic.Implementations
                     periodRequest = "now+7-d";
                     break;
                 case GoogleTrendsPeriod.PastDay:
-                    periodRequest = "today+1-d";
-                    break;
-                case GoogleTrendsPeriod.PastHour:
-                    periodRequest = "today+1-h";
+                    periodRequest = "now+1-d";
                     break;
             }
             var authorizationRequest = new GoogleTrendsAuthorizationRequest

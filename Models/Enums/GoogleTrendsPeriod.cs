@@ -8,7 +8,6 @@
         Past3Months,
         PastMonth,
         PastWeek,
-        PastDay,
-        PastHour
+        PastDay
     }
 }
