@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace IDZ1
 {
@@ -14,6 +16,10 @@ namespace IDZ1
         private readonly IGoogleTrendsService _googleTrendsService;
         private readonly IBukvarixService _bukvarixService;
         private readonly IAdvegoService _advegoService;
+        private StringBuilder _competitorsResult;
+        private StringBuilder _queryStatisticResult;
+        private StringBuilder _statisticAnalysisResult;
+        private StringBuilder _semanticAnalysisResult;
 
         public MainForm(IGoogleSearchService googleSearchService,
             IGoogleTrendsService googleTrendsService,
@@ -24,6 +30,10 @@ namespace IDZ1
             _googleTrendsService = googleTrendsService;
             _bukvarixService = bukvarixService;
             _advegoService = advegoService;
+            _competitorsResult = new StringBuilder();
+            _queryStatisticResult = new StringBuilder();
+            _statisticAnalysisResult = new StringBuilder();
+            _semanticAnalysisResult = new StringBuilder();
             InitializeComponent();
         }
 
@@ -46,6 +56,7 @@ namespace IDZ1
                 }
                 else
                 {
+                    _competitorsResult.Clear();
                     for (int i = 0; i < response.Items.Count; i++)
                     {
                         var labelTitle = new Label
@@ -82,6 +93,7 @@ namespace IDZ1
                         this.panel_searchResults.Controls.Add(linkLabel);
                         this.panel_searchResults.Controls.Add(richTextBoxSnippet);
                         this.panel_searchResults.Controls.Add(labelUnderScore);
+                        _competitorsResult.AppendLine($"${response.Items[i].Title}\n{response.Items[i].Link}\n{response.Items[i].Snippet}\n");
                     }
                 }
                 this.Refresh();
@@ -162,10 +174,12 @@ namespace IDZ1
                 var response = await _googleTrendsService.GetTrendsForPeriod(textBox_statisticKeyword.Text, period);
                 if (response.Default.TimelineData.Count == 0)
                     MessageBox.Show("Информация о данном запросе отсутствует!");
+                _queryStatisticResult.Clear();
                 dataGridView_StatisticTable.Rows.Clear();
                 foreach (var item in response.Default.TimelineData)
                 {
                     dataGridView_StatisticTable.Rows.Add(item.FormattedTime, item.Value.Single());
+                    _queryStatisticResult.AppendLine($"{item.FormattedTime} -  {item.Value.Single()}");
                 }
             }
             catch (Exception ex)
@@ -214,20 +228,88 @@ namespace IDZ1
                 dataGridView_textStatistic.Rows.Clear();
                 dataGridView_semanticKernel.Rows.Clear();
 
+                _statisticAnalysisResult.Clear();
+                _semanticAnalysisResult.Clear();
                 foreach (var item in response.TextStatistic)
                 {
                     dataGridView_textStatistic.Rows.Add(item.Key, item.Value);
+                    _statisticAnalysisResult.AppendLine($"{item.Key} - {item.Value}");
                 }
 
                 foreach (var item in response.SemanticKernel)
                 {
                     dataGridView_semanticKernel.Rows.Add(item.Key, item.Value.Count, item.Value.Frequency);
+                    _semanticAnalysisResult.AppendLine($"{item.Key} - {item.Value.Count} - {item.Value.Frequency}");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
+            }
+        }
+
+        private async void button_exportTxt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var txtContent = new StringBuilder("Отчет\n");
+                if (checkBox_includeCompetotors.Checked)
+                {
+                    txtContent.AppendLine($"Определение конкурентов по запросу {textBox_searchCompetitors.Text}:");
+                    txtContent.AppendLine(_competitorsResult.ToString());
+                    txtContent.AppendLine("_______________________");
+                }
+
+                if (checkBox_includeFrequencyGroup.Checked)
+                {
+                    txtContent.AppendLine("Группировка по частотности:");
+                    txtContent.AppendLine("Высокочастотные ключевые слова:");
+                    txtContent.AppendLine(richTextBox_HighFrequencyKeywords.Text);
+                    txtContent.AppendLine("Среднечастотные ключевые слова:");
+                    txtContent.AppendLine(richTextBox_MediumFrequencyKeywords.Text);
+                    txtContent.AppendLine("Низкочастотные ключевые слова:");
+                    txtContent.AppendLine(richTextBox_LowFrequencyKeywords.Text);
+                    txtContent.AppendLine("_______________________");
+                }
+
+                if (checkBox_includeStatistic.Checked)
+                {
+                    txtContent.AppendLine($"Статистика по запросу {textBox_statisticKeyword.Text}:");
+                    txtContent.AppendLine(_queryStatisticResult.ToString());
+                    txtContent.AppendLine("_______________________");
+                }
+
+                if (checkBox_includePhrase.Checked)
+                {
+                    txtContent.AppendLine($"Словосочетания со словом {textBox_searchPhrasesWord.Text}:");
+                    txtContent.AppendLine(richTextBox_searchedPhrases.Text);
+                    txtContent.AppendLine("_______________________");
+                }
+
+                if (checkBox_includeSemantic.Checked)
+                {
+                    txtContent.AppendLine("Семантический анализ:");
+                    txtContent.AppendLine($"Исходный текст: {richTextBox_textForAnalysis.Text}");
+                    txtContent.AppendLine("Статистика текста:");
+                    txtContent.AppendLine("Показатель - Значение:");
+                    txtContent.AppendLine(_statisticAnalysisResult.ToString());
+
+                    txtContent.AppendLine("Семантическое ядро:");
+                    txtContent.AppendLine("Слово - Кол-во - частота:");
+                    txtContent.AppendLine(_semanticAnalysisResult.ToString());
+                    txtContent.AppendLine("_______________________");
+                }
+
+                using (var writer = new StreamWriter("results.txt"))
+                {
+                    await writer.WriteLineAsync(txtContent.ToString());
+                }
+                MessageBox.Show("Файл results.txt был сформирован успешно!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

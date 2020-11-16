@@ -64,6 +64,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBox_searchPhrasesWord = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
             this.dataGridView_semanticKernel = new System.Windows.Forms.DataGridView();
             this.word = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.count = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,7 +76,21 @@
             this.label12 = new System.Windows.Forms.Label();
             this.button_analyzeText = new System.Windows.Forms.Button();
             this.richTextBox_textForAnalysis = new System.Windows.Forms.RichTextBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.checkBox_includeCompetotors = new System.Windows.Forms.CheckBox();
+            this.checkBox_includeFrequencyGroup = new System.Windows.Forms.CheckBox();
+            this.checkBox_includeStatistic = new System.Windows.Forms.CheckBox();
+            this.checkBox_includePhrase = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox_includeSemantic = new System.Windows.Forms.CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.button_exportTxt = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -87,6 +102,7 @@
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_semanticKernel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_textStatistic)).BeginInit();
+            this.tabPage6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -96,6 +112,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Location = new System.Drawing.Point(0, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 5;
@@ -478,6 +495,15 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Семантический анализ";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(310, 163);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(125, 15);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Семантическое ядро:";
+            // 
             // dataGridView_semanticKernel
             // 
             this.dataGridView_semanticKernel.AllowUserToAddRows = false;
@@ -581,14 +607,158 @@
             this.richTextBox_textForAnalysis.TabIndex = 1;
             this.richTextBox_textForAnalysis.Text = "";
             // 
-            // label14
+            // tabPage6
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(310, 163);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(125, 15);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "Семантическое ядро:";
+            this.tabPage6.Controls.Add(this.button_exportTxt);
+            this.tabPage6.Controls.Add(this.label15);
+            this.tabPage6.Controls.Add(this.checkBox_includeSemantic);
+            this.tabPage6.Controls.Add(this.checkBox_includePhrase);
+            this.tabPage6.Controls.Add(this.checkBox_includeStatistic);
+            this.tabPage6.Controls.Add(this.checkBox_includeFrequencyGroup);
+            this.tabPage6.Controls.Add(this.checkBox_includeCompetotors);
+            this.tabPage6.Location = new System.Drawing.Point(4, 24);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(647, 329);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Экспорт";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_includeCompetotors
+            // 
+            this.checkBox_includeCompetotors.AutoSize = true;
+            this.checkBox_includeCompetotors.Location = new System.Drawing.Point(252, 76);
+            this.checkBox_includeCompetotors.Name = "checkBox_includeCompetotors";
+            this.checkBox_includeCompetotors.Size = new System.Drawing.Size(173, 19);
+            this.checkBox_includeCompetotors.TabIndex = 0;
+            this.checkBox_includeCompetotors.Text = "Определение конкурентов";
+            this.checkBox_includeCompetotors.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_includeFrequencyGroup
+            // 
+            this.checkBox_includeFrequencyGroup.AutoSize = true;
+            this.checkBox_includeFrequencyGroup.Location = new System.Drawing.Point(252, 113);
+            this.checkBox_includeFrequencyGroup.Name = "checkBox_includeFrequencyGroup";
+            this.checkBox_includeFrequencyGroup.Size = new System.Drawing.Size(186, 19);
+            this.checkBox_includeFrequencyGroup.TabIndex = 0;
+            this.checkBox_includeFrequencyGroup.Text = "Группировка по частотности";
+            this.checkBox_includeFrequencyGroup.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_includeStatistic
+            // 
+            this.checkBox_includeStatistic.AutoSize = true;
+            this.checkBox_includeStatistic.Location = new System.Drawing.Point(252, 149);
+            this.checkBox_includeStatistic.Name = "checkBox_includeStatistic";
+            this.checkBox_includeStatistic.Size = new System.Drawing.Size(151, 19);
+            this.checkBox_includeStatistic.TabIndex = 0;
+            this.checkBox_includeStatistic.Text = "Статистика по запросу";
+            this.checkBox_includeStatistic.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_includePhrase
+            // 
+            this.checkBox_includePhrase.AutoSize = true;
+            this.checkBox_includePhrase.Location = new System.Drawing.Point(252, 183);
+            this.checkBox_includePhrase.Name = "checkBox_includePhrase";
+            this.checkBox_includePhrase.Size = new System.Drawing.Size(118, 19);
+            this.checkBox_includePhrase.TabIndex = 0;
+            this.checkBox_includePhrase.Text = "Словосочетания";
+            this.checkBox_includePhrase.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(167, 184);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(118, 19);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Словосочетания";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.Location = new System.Drawing.Point(0, 0);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(104, 24);
+            this.checkBox2.TabIndex = 0;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(167, 184);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(118, 19);
+            this.checkBox3.TabIndex = 0;
+            this.checkBox3.Text = "Словосочетания";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(167, 150);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(151, 19);
+            this.checkBox4.TabIndex = 0;
+            this.checkBox4.Text = "Статистика по запросу";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(167, 114);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(186, 19);
+            this.checkBox5.TabIndex = 0;
+            this.checkBox5.Text = "Группировка по частотности";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(167, 77);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(173, 19);
+            this.checkBox6.TabIndex = 0;
+            this.checkBox6.Text = "Определение конкурентов";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Location = new System.Drawing.Point(167, 184);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(118, 19);
+            this.checkBox7.TabIndex = 0;
+            this.checkBox7.Text = "Словосочетания";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_includeSemantic
+            // 
+            this.checkBox_includeSemantic.AutoSize = true;
+            this.checkBox_includeSemantic.Location = new System.Drawing.Point(252, 219);
+            this.checkBox_includeSemantic.Name = "checkBox_includeSemantic";
+            this.checkBox_includeSemantic.Size = new System.Drawing.Size(161, 19);
+            this.checkBox_includeSemantic.TabIndex = 1;
+            this.checkBox_includeSemantic.Text = "Семанитический анализ";
+            this.checkBox_includeSemantic.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(207, 47);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(163, 15);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "Выберите желаемые опции:";
+            // 
+            // button_exportTxt
+            // 
+            this.button_exportTxt.Location = new System.Drawing.Point(279, 258);
+            this.button_exportTxt.Name = "button_exportTxt";
+            this.button_exportTxt.Size = new System.Drawing.Size(101, 23);
+            this.button_exportTxt.TabIndex = 3;
+            this.button_exportTxt.Text = "Экспорт в txt";
+            this.button_exportTxt.UseVisualStyleBackColor = true;
+            this.button_exportTxt.Click += new System.EventHandler(this.button_exportTxt_Click);
             // 
             // MainForm
             // 
@@ -616,6 +786,8 @@
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_semanticKernel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_textStatistic)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -670,6 +842,21 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn frequency;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.DataGridView dataGridView_semanticKernel;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.CheckBox checkBox_includeCompetotors;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.CheckBox checkBox_includeSemantic;
+        private System.Windows.Forms.CheckBox checkBox_includePhrase;
+        private System.Windows.Forms.CheckBox checkBox_includeStatistic;
+        private System.Windows.Forms.CheckBox checkBox_includeFrequencyGroup;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.Button button_exportTxt;
     }
 }
 
