@@ -253,6 +253,11 @@
             0,
             0,
             0});
+            this.numericUpDown_lowFrequencyThreshold.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
             this.numericUpDown_lowFrequencyThreshold.Name = "numericUpDown_lowFrequencyThreshold";
             this.numericUpDown_lowFrequencyThreshold.Size = new System.Drawing.Size(100, 23);
             this.numericUpDown_lowFrequencyThreshold.TabIndex = 5;
